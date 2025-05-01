@@ -9,18 +9,23 @@ class LogJuicer():
     def __init__(self, logpath):
         self.logfile = logpath
         self.baseline = self.baseline()
+        self.juicer = "/home/apalanis/.cargo/bin/logjuicer"
+        self.config = 'config.yaml'
 
     def baseline(self):
         return 'baselines/' + str.split(self.logfile, '_')[0] + '.log'
 
     def juice(self):
-        juicer = "/home/apalanis/.cargo/bin/logjuicer"
-        config = 'config.yaml'
-        command = [juicer, "--config", config, "diff",
+
+        command = [self.juicer, "--config", self.config, "diff",
                    self.baseline, self.logfile]
-        print("RUNNING COMMAND", command)
-        process = subprocess.run(command, capture_output=True, text=True)
-        print(process)
+        print("Juicing logfile with:", command)
+        process = subprocess.run(command, capture_output=True,
+                                 text=True)
+
+        if process.returncode != 0:
+            print(f"Error during logjuicer execution: {process.stderr}")
+            return None
         diff = process.stdout
         return diff
 
