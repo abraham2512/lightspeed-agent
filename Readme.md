@@ -1,3 +1,3 @@
 ## Triage Agent
 
-Agentic AI based tool for triage analysis
+Python client to query Openshift Lightspeed Service on Ollama
