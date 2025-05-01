@@ -1,14 +1,22 @@
 import requests
 import json
 import sys
-
-
+from logjuicer import LogJuicer
+import time
 class OLSClient:
     """Python client for OpenShift Lightspeed service"""
 
     def __init__(self, url, auth_token=None):
         self.endpoint = f"{url}/v1/query"
         self.auth_token = auth_token
+        self.connect()
+
+    def connect(self):
+        print("Waiting for Lightspeed Service status")
+        if requests.get(self.endpoint).status_code == 200:
+            print("Service Authenticated")
+            return True
+        return False
 
     def query(self, query, model="llama3.1:latest", provider="ollama"):
         payload = {
@@ -37,6 +45,10 @@ if __name__ == "__main__":
         python agent.py analyze <logfile>")
         sys.exit(1)
     client = OLSClient("http://192.168.1.180:8080")
+    if client:
+        time.sleep(2)
+        print("Connected to Lightspeed Service")
+        time.sleep(2)
     match sys.argv[1]:
         case 'ask':
             query = " ".join(sys.argv[2:])
@@ -44,27 +56,35 @@ if __name__ == "__main__":
             try:
                 response = client.query(query)
                 print("Response:", json.dumps(response, indent=2))
-                print('------------------------------------------->\n'\
+                print('------------------------------------------->\n'
                       + response.get("response"))
             except Exception as e:
                 print(f"Error: {e}")
         case 'analyze':
-            print("Analyzing logdiff with Openshift Lightspeed Service")
             filename = sys.argv[2]
+            print("Analyzing logfile", filename)
+            time.sleep(2)
+            juicer = LogJuicer(filename)
+            logdiff = juicer.juice()
+            if logdiff is None:
+                print("Error during logjuicer execution")
+                sys.exit(1)
+            print("Diff generated from baseline for logtype\n",
+                  juicer.logtype(), logdiff)
+            print("Analyzing generated logdiff with Lightspeed Service")
             prompt = """This is a log diff of a failure in an OS latency,\
             network latency or other performance related test,\
             analyze this log, write a short summary and \
             print the relevant log file paths in must-gather\n\
                 """
-            with open(filename) as file:
-                contents = file.read()
-                query = prompt+contents
-                try:
-                    response = client.query(query)
-                    print("Response:", json.dumps(response, indent=2))
-                    print('------------------------------------------->\n'\
-                          + response.get("response"))
-                except Exception as e:
-                    print(f"Error: {e}")
+            query = prompt+logdiff
+
+            try:
+                response = client.query(query)
+                print("Response:", json.dumps(response, indent=2))
+                print('------------------------------------------->\n'
+                        + response.get("response"))
+            except Exception as e:
+                print(f"Error: {e}")
         case _:
             print("unknown option")
