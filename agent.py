@@ -83,7 +83,7 @@ if __name__ == "__main__":
                 response = client.query(query)
                 print("Response:", json.dumps(response, indent=2))
                 print('------------------------------------------->\n'
-                        + response.get("response"))
+                      + response.get("response"))
             except Exception as e:
                 print(f"Error: {e}")
         case _:
