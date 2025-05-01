@@ -32,8 +32,9 @@ class OLSClient:
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage help:\npython agent.py ask <query>\n\
-              python agent.py analyze <logfile>")
+        print("Usage help:\n\
+        python agent.py ask <query>\n\
+        python agent.py analyze <logfile>")
         sys.exit(1)
     client = OLSClient("http://192.168.1.180:8080")
     match sys.argv[1]:
@@ -60,3 +61,6 @@ if __name__ == "__main__":
                     print("Response:", json.dumps(response, indent=2))
                 except Exception as e:
                     print(f"Error: {e}")
+        case _:
+            print("unknown option")
+
