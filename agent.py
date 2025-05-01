@@ -40,13 +40,16 @@ if __name__ == "__main__":
     match sys.argv[1]:
         case 'ask':
             query = " ".join(sys.argv[2:])
+            print("Asking Openshift Lightspeed Service")
             try:
                 response = client.query(query)
                 print("Response:", json.dumps(response, indent=2))
+                print('------------------------------------------->\n'\
+                      + response.get("response"))
             except Exception as e:
                 print(f"Error: {e}")
         case 'analyze':
-            print("Analyzing logdiff with OLS")
+            print("Analyzing logdiff with Openshift Lightspeed Service")
             filename = sys.argv[2]
             prompt = """This is a log diff of a failure in an OS latency,\
             network latency or other performance related test,\
@@ -59,6 +62,8 @@ if __name__ == "__main__":
                 try:
                     response = client.query(query)
                     print("Response:", json.dumps(response, indent=2))
+                    print('------------------------------------------->\n'\
+                          + response.get("response"))
                 except Exception as e:
                     print(f"Error: {e}")
         case _:
