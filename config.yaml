@@ -1,0 +1,10 @@
+- config:
+    ignore_patterns:
+      - RAN_METRICS
+      - ranmetrics
+      - Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+      - Dload  Upload   Total   Spent    Left  Speed
+      - --:--:-- --:--:-- --:--:--
+      - jenkins
+      - pipeline_stage=
+      - parsing error
