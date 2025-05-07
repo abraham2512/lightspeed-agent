@@ -1,5 +1,5 @@
-# Openshift log analysis using Lightspeed Service
-### This project is a work in progress
+# Pipeline log analysis using Openshift Lightspeed Service
+### This project is a PoC and work is in progress
 Log Analyzer using Openshift Lightspeed Service
 
 Prerequisites:
