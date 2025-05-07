@@ -1,8 +1,8 @@
-## Triage Agent
-### Work in progress
-Python client to query Openshift Lightspeed Service on Ollama
+# Openshift log analysis using Lightspeed Service
+### This project is a work in progress
+Log Analyzer using Openshift Lightspeed Service
 
-Prequisites
-    1. OpenShift Service on Ollama
-    2. Logjuicer 
-    3. Baselines of test logs
+Prequisites:
+* OpenShift lightspeed-service - https://github.com/openshift/lightspeed-service
+* Ollama server - https://ollama.com/download/linux
+* Logjuicer - https://github.com/logjuicer/logjuicer
