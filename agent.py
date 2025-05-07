@@ -3,6 +3,8 @@ import json
 import sys
 from logjuicer import LogJuicer
 import time
+
+
 class OLSClient:
     """Python client for OpenShift Lightspeed service"""
 

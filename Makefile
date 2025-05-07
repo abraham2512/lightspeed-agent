@@ -1,5 +1,4 @@
-test:
-	python agent.py analyze oslat_failure_cnfdg15.log
+test: test-ols
 test-ols: ## Run the service locally
 	python agent.py ask what is OLS?
 test-logjuicer:
