@@ -10,7 +10,7 @@ class LogJuicer():
         self.logfile = logpath
         self.baseline = self.baseline()
         self.juicer = "/home/apalanis/.cargo/bin/logjuicer"
-        self.config = 'logjuicer.config'
+        self.config = 'logjuicer.yaml'
 
     def baseline(self):
         return 'baselines/' + str.split(self.logfile, '_')[0] + '.log'
