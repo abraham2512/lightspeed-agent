@@ -72,12 +72,12 @@ if __name__ == "__main__":
                 print("Error during logjuicer execution")
                 sys.exit(1)
             print("Diff generated from baseline for logtype\n",
-                  juicer.logtype(), logdiff)
+                  juicer.logtype, logdiff)
             print("Analyzing generated logdiff with Lightspeed Service")
             prompt = """This is a log diff of a failure in an OS latency,\
             network latency or other performance related test,\
-            analyze this log, write a short summary and \
-            print the relevant log file paths in must-gather\n\
+            analyze this log, write a traige summary describing failure and \
+            give the exact path to relevant must-gather log files\n\
                 """
             query = prompt+logdiff
 

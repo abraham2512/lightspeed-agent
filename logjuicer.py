@@ -11,6 +11,7 @@ class LogJuicer():
         self.baseline = self.baseline()
         self.juicer = "/home/apalanis/.cargo/bin/logjuicer"
         self.config = 'logjuicer.yaml'
+        self.logtype = self.logtype()
 
     def baseline(self):
         return 'baselines/' + str.split(self.logfile, '_')[0] + '.log'
