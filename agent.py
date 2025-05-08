@@ -48,9 +48,7 @@ if __name__ == "__main__":
         sys.exit(1)
     client = OLSClient("http://192.168.1.180:8080")
     if client:
-        time.sleep(2)
         print("Connected to Lightspeed Service")
-        time.sleep(2)
     match sys.argv[1]:
         case 'ask':
             query = " ".join(sys.argv[2:])
@@ -65,7 +63,6 @@ if __name__ == "__main__":
         case 'analyze':
             filename = sys.argv[2]
             print("Analyzing logfile", filename)
-            time.sleep(2)
             juicer = LogJuicer(filename)
             logdiff = juicer.juice()
             if logdiff is None:
@@ -83,7 +80,7 @@ if __name__ == "__main__":
 
             try:
                 response = client.query(query)
-                print("Response:", json.dumps(response, indent=2))
+                # print("Response:", json.dumps(response, indent=2))
                 print('------------------------------------------->\n'
                       + response.get("response"))
             except Exception as e:
