@@ -8,6 +8,10 @@ Log Analyzer using Openshift Lightspeed Service with Jira integration
 * Logjuicer - https://github.com/logjuicer/logjuicer
 * Jira access (for Jira integration features)
 
+## Outline
+
+![outline](blueprint.png)
+
 ## Directory Structure:
 
 * `agent.py` - Python interface with Jira integration
